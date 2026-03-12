@@ -23,9 +23,9 @@ void main() async {
     // Handle missing .env file gracefully in development
     if (kDebugMode) print("Warning: .env file not found");
   }
-
-  await initDependencies();
   // SecurityService.isEnabled = false;
+  await initDependencies();
+
   // Global Error Handling for UI
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return ErrorScreen(errorDetails: details);

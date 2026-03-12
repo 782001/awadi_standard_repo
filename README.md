@@ -9,6 +9,11 @@ This is a **ready-to-use Flutter utilities setup** that simplifies common tasks 
 - Navigation without context
 - App-wide constants
 - flutter_launcher_icons
+- Security device checks (Root/Jailbreak)
+- Secure token storage
+- Safe logging management
+- Data obfuscation
+- Global error handling
 It’s modular and can be copied into any Flutter project.
 
 ---
@@ -16,12 +21,25 @@ It’s modular and can be copied into any Flutter project.
 
 ```dart
 final cashHelper = sl<CashHelper>();
+final secureStorage = sl<SecureStorageHelper>();
 final dio = sl<DioClient>();
 final navigator = sl<NavigatorService>();
+
 ------------Navigation--------
   nav().pushNamed(Routes.authWelcomeScreen);
+
 ------------Translation----------
 AppStrings.login.tr()
+
+------------Logging--------------
+AppLogger.handleLogs("Log message only in debug mode");
+
+------------Security-------------
+// make sure that SecurityService.isEnabled = true;
+// in main.dart
+SecurityService.isEnabled = true;
+await SecurityService.checkSecurity(); // Navigates if insecure
+String safeData = SecurityService.obfuscateData("sensitive@info.com");
 ```
 
 ## 1️⃣ NavigatorService
