@@ -397,18 +397,46 @@ A Cubit-based theme management system that persists the user's choice using `Cas
 - **Integration**: Wrapped in `main.dart`'s `MaterialApp` via `BlocBuilder`.
 
 ### Usage
-Toggle theme from any widget:
+Toggle theme from any widget or using global helpers:
 
 ```dart
 import 'package:new_standred/features/theme/presentation/cubit/theme_cubit.dart';
 
-// Inside a build method or button callback
+// Option 1: Global shortcut (anywhere)
+theme().toggleTheme();
+
+// Option 2: BuildContext extension (inside widgets)
+context.theme.toggleTheme();
+
+// Option 3: Standard Bloc access
 context.read<ThemeCubit>().toggleTheme();
 
-// Or switch to specific modes
-context.read<ThemeCubit>().toDarkMode();
-context.read<ThemeCubit>().toLightMode();
+// Switch to specific modes
+theme().toDarkMode();
+theme().toLightMode();
 ```
+
+### Pre-built Widgets
+We provide two ready-to-use widgets for theme switching:
+
+1. **ThemeToggleButton**: A simple icon button for AppBars.
+   ```dart
+   appBar: AppBar(
+     actions: [ThemeToggleButton()],
+   )
+   ```
+
+2. **ThemeSwitchListTile**: A ListTile with a switch, perfect for settings screens.
+   ```dart
+   ListView(
+     children: [
+       ThemeSwitchListTile(
+         title: "Dark Mode",
+         leadingIcon: Icons.dark_mode,
+       ),
+     ],
+   )
+   ```
 
 ---
 

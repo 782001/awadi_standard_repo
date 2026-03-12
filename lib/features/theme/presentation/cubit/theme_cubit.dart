@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_standred/core/services/injection_container.dart';
 import 'package:new_standred/core/storage/cashhelper.dart';
 import 'package:new_standred/features/theme/presentation/cubit/theme_state.dart';
+
+ThemeCubit theme() => sl<ThemeCubit>();
+
+extension ThemeContext on BuildContext {
+  ThemeCubit get theme => read<ThemeCubit>();
+}
 
 class ThemeCubit extends Cubit<ThemeState> {
   final CashHelper cashHelper;
