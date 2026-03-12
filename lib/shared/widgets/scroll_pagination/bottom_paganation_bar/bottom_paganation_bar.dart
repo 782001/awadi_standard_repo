@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_standred/core/utils/app_colors.dart';
 import 'package:new_standred/shared/widgets/fields/text_widget.dart';
 //Usage///
 // PaginationBar(
@@ -59,8 +60,8 @@ class BottomPaginationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary = Theme.of(context).colorScheme.primary;
-    final disabled = Theme.of(context).disabledColor.withOpacity(0.5);
+    final primary = AppColors.primaryColor;
+    final disabled = AppColors.disabledColor.withOpacity(0.5);
     final items = _items();
 
     Widget pageChip(int page) {
@@ -83,7 +84,7 @@ class BottomPaginationBar extends StatelessWidget {
               color:
                   selected
                       ? Colors.white
-                      : Theme.of(context).textTheme.bodyMedium?.color,
+                      : AppColors.textColor,
               fontWeight: FontWeight.w600,
             ),
           ),

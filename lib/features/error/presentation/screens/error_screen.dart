@@ -5,6 +5,7 @@ import 'package:new_standred/core/utils/app_colors.dart';
 import 'package:new_standred/core/utils/app_strings.dart';
 import 'package:new_standred/core/utils/styles.dart';
 import 'package:new_standred/shared/widgets/fields/text_widget.dart';
+import 'package:new_standred/shared/widgets/buttons/theme_toggle_button.dart';
 
 class ErrorScreen extends StatelessWidget {
   final FlutterErrorDetails errorDetails;
@@ -15,6 +16,11 @@ class ErrorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scafoldBackGround,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: const [ThemeToggleButton()],
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -40,7 +46,7 @@ class ErrorScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.all(16.h),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.cardCustomer,
                     borderRadius: BorderRadius.circular(12.r),
                     border: Border.all(
                       color: AppColors.redColor.withOpacity(0.3),
@@ -58,7 +64,7 @@ class ErrorScreen extends StatelessWidget {
                         SelectableText(
                           errorDetails.toString(),
                           style: TextStyles.font14Weight400RightAligned()
-                              .copyWith(color: Colors.black87),
+                              .copyWith(color: AppColors.textColor),
                         ),
                       ],
                     ),

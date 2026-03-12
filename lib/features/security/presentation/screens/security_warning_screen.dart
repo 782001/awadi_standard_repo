@@ -5,6 +5,7 @@ import 'package:new_standred/core/utils/app_colors.dart';
 import 'package:new_standred/core/utils/app_strings.dart';
 import 'package:new_standred/core/utils/styles.dart';
 import 'package:new_standred/shared/widgets/fields/text_widget.dart';
+import 'package:new_standred/shared/widgets/buttons/theme_toggle_button.dart';
 
 class SecurityWarningScreen extends StatelessWidget {
   final bool isRooted;
@@ -20,6 +21,11 @@ class SecurityWarningScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scafoldBackGround,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: const [ThemeToggleButton()],
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -49,7 +55,7 @@ class SecurityWarningScreen extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(20.h),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.cardCustomer,
                   borderRadius: BorderRadius.circular(16.r),
                   boxShadow: [
                     BoxShadow(

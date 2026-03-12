@@ -18,7 +18,7 @@ class CustomTitle extends StatelessWidget {
       child: ShaderMask(
         shaderCallback:
             (bounds) => LinearGradient(
-              colors: [Colors.white, AppColors.blue100],
+              colors: [Colors.white, AppColors.actionButton],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ).createShader(bounds),

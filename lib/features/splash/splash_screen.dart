@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:new_standred/core/services/security_service.dart';
 import 'package:new_standred/core/services/translation_helper.dart';
-import 'package:new_standred/core/utils/app_colors.dart';
 import 'package:new_standred/core/utils/app_constants.dart';
 import 'package:new_standred/core/utils/styles.dart';
 import 'package:new_standred/shared/widgets/fields/text_widget.dart';
+import 'package:new_standred/shared/widgets/buttons/theme_toggle_button.dart';
+import 'package:new_standred/core/utils/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -58,47 +59,56 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      body: Center(
-        child: FadeTransition(
-          opacity: _fadeAnimation,
-          child: ScaleTransition(
-            scale: _scaleAnimation,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 20,
-                        offset: const Offset(0, 10),
+      body: Stack(
+        children: [
+          Center(
+            child: FadeTransition(
+              opacity: _fadeAnimation,
+              child: ScaleTransition(
+                scale: _scaleAnimation,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.star_rounded,
-                      size: 80,
-                      color: AppColors.primaryColor,
+                      child: Center(
+                        child: Icon(
+                          Icons.star_rounded,
+                          size: 80,
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 24),
+                    TextWidget(
+                      Loc.tr(context, AppConstants.splashText),
+                      style: TextStyles.font28WeightBoldWhite().copyWith(
+                        letterSpacing: 4,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 24),
-                TextWidget(
-                  Loc.tr(context, AppConstants.splashText),
-                  style: TextStyles.font28WeightBoldWhite().copyWith(
-                    letterSpacing: 4,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+          const Positioned(
+            top: 40,
+            right: 16,
+            child: ThemeToggleButton(),
+          ),
+        ],
       ),
     );
   }

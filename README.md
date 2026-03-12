@@ -7,6 +7,7 @@ This is a **ready-to-use Flutter utilities setup** that simplifies common tasks 
 - Dio setup for APIs
 - Navigation without context
 - App-wide constants
+- Centralized theme-aware colors (AppColors)
 - flutter_launcher_icons
 - Security device checks (Root/Jailbreak)
 - Secure token storage
@@ -42,8 +43,12 @@ SecurityService.isEnabled = true;
 await SecurityService.checkSecurity(); // Navigates if insecure
 String safeData = SecurityService.obfuscateData("sensitive@info.com");
 
-------------Theme----------------
 context.read<ThemeCubit>().toggleTheme();
+
+------------AppColors------------
+// Automatically switches based on current theme
+Color background = AppColors.scafoldBackGround;
+Color text = AppColors.textColor;
 ```
 
 ## 1️⃣ NavigatorService

@@ -51,7 +51,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ? TextWidget(
                 centerTitle!,
                 style: TextStyles.font18Weight500Action().copyWith(
-                  color: centerTitleColor ?? AppColors.black,
+                  color: centerTitleColor ?? AppColors.textColor,
                 ),
               )
               : Image.asset(

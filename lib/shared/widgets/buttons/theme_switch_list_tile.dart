@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_standred/core/utils/app_colors.dart';
 import 'package:new_standred/features/theme/presentation/cubit/theme_cubit.dart';
 import 'package:new_standred/features/theme/presentation/cubit/theme_state.dart';
 
@@ -24,7 +25,7 @@ class ThemeSwitchListTile extends StatelessWidget {
           trailing: Switch.adaptive(
             value: isDark,
             onChanged: (_) => context.read<ThemeCubit>().toggleTheme(),
-            activeColor: Theme.of(context).primaryColor,
+            activeColor: AppColors.primaryColor,
           ),
           onTap: () => context.read<ThemeCubit>().toggleTheme(),
         );
