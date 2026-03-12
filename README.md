@@ -445,6 +445,99 @@ We provide two ready-to-use widgets for theme switching:
 
 ---
 
+## 1️⃣3️⃣ Centralized Theme-Aware Colors (AppColors)
+
+✅✅ A centralized system for managing colors that automatically adapt to the current theme (Light or Dark).
+
+### Core Features:
+- **Dynamic Getters**: `AppColors` properties are getters that evaluate the current theme state dynamically.
+- **Theme Awareness**: Uses `NavigatorService` to check the current `Brightness` or directly interfaces with `ThemeCubit`.
+- **Consistency**: Ensures all UI components (TextStyles, CustomButtons, Containers) use the same semantic colors.
+
+### Usage:
+Instead of reaching into `Theme.of(context)` manually, use `AppColors` anywhere:
+
+```dart
+Container(
+  color: AppColors.scafoldBackGround, // Changes automatically
+  child: Text(
+    "Hello World",
+    style: TextStyle(color: AppColors.textColor),
+  ),
+)
+```
+
+---
+
+## 1️⃣4️⃣ Vital Android Configuration
+
+> [!IMPORTANT]
+> The following Android configuration details are **CRITICAL** and must be included in every project to ensure correct module resolution, secure signing, and consistent builds across different environments.
+
+### 1. Root `build.gradle.kts` (Namespace Fix)
+Add the following `subprojects` block to your `android/build.gradle.kts`. This is essential for fixing namespace issues in older plugins (like `flutter_jailbreak_detection`) and ensuring proper evaluation order.
+
+```kotlin
+subprojects {
+    if (project.name != "app") {
+        project.evaluationDependsOn(":app")
+
+        afterEvaluate {
+            val androidExt = project.extensions.findByName("android")
+            if (androidExt != null) {
+                try {
+                    val getNamespace = androidExt.javaClass.getMethod("getNamespace")
+                    val currentNamespace = getNamespace.invoke(androidExt)
+                    if (currentNamespace == null) {
+                        val manifestFile = project.file("src/main/AndroidManifest.xml")
+                        if (manifestFile.exists()) {
+                            val content = manifestFile.readText()
+                            val matcher = java.util.regex.Pattern.compile("""package="([^"]+)"""").matcher(content)
+                            if (matcher.find()) {
+                                val packageName = matcher.group(1)
+                                val setNamespace = androidExt.javaClass.getMethod("setNamespace", String::class.java)
+                                setNamespace.invoke(androidExt, packageName)
+                            }
+                        } else if (project.name == "flutter_jailbreak_detection") {
+                            val setNamespace = androidExt.javaClass.getMethod("setNamespace", String::class.java)
+                            setNamespace.invoke(androidExt, "com.rioapp.demo.flutter_jailbreak_detection")
+                        }
+                    }
+                } catch (e: Exception) {
+                    // Ignore reflection exceptions if methods don't exist
+                }
+            }
+        }
+    }
+}
+```
+
+### 2. App Signing & `key.properties`
+To maintain secure and consistent release builds, use a `key.properties` file in the `android/` directory.
+
+**File Structure (`android/key.properties`):**
+```properties
+storePassword=your_password
+keyPassword=your_password
+keyAlias=your_alias
+storeFile=path/to/your/upload-keystore.jks
+```
+
+**Implementation in `android/app/build.gradle.kts`:**
+Ensure your app-level build file loads these properties:
+```kotlin
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+```
+
+Then, use `keystoreProperties.getProperty("...")` within your `signingConfigs`.
+
+---
+
 This setup allows you to copy the folder structure and utilities into any Flutter project and get started immediately.
 
 ---
