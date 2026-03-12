@@ -11,6 +11,7 @@ import 'package:new_standred/features/localization/domain/repositories/lang_repo
 import 'package:new_standred/features/localization/domain/usecases/change_lang.dart';
 import 'package:new_standred/features/localization/domain/usecases/get_saved_lang.dart';
 import 'package:new_standred/features/localization/presentation/cubit/locale_cubit.dart';
+import 'package:new_standred/features/theme/presentation/cubit/theme_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -22,6 +23,11 @@ Future<void> initDependencies() async {
   /// -----localizationCubit------
   sl.registerFactory<LocaleCubit>(
     () => LocaleCubit(getSavedLangUseCase: sl(), changeLangUseCase: sl()),
+  );
+
+  // theme
+  sl.registerFactory<ThemeCubit>(
+    () => ThemeCubit(cashHelper: sl()),
   );
 
   /// --------useCases----------

@@ -10,6 +10,8 @@ import 'package:new_standred/core/services/navigator_service.dart';
 import 'package:new_standred/core/utils/app_constants.dart';
 import 'package:new_standred/features/error/presentation/screens/error_screen.dart';
 import 'package:new_standred/features/localization/presentation/cubit/locale_cubit.dart';
+import 'package:new_standred/features/theme/presentation/cubit/theme_cubit.dart';
+import 'package:new_standred/features/theme/presentation/cubit/theme_state.dart';
 import 'package:new_standred/no-internet/no_internet.dart';
 import 'package:new_standred/routes/app_routes.dart';
 
@@ -48,36 +50,50 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => di.sl<LocaleCubit>()..getSavedLang()),
+        BlocProvider(create: (context) => di.sl<ThemeCubit>()),
         BlocProvider(create: (context) => ConnectivityCubit()),
       ],
-      child: BlocBuilder<LocaleCubit, LocaleState>(
-        buildWhen: (previousState, currentState) {
-          return previousState != currentState;
-        },
-        builder: (context, state) {
-          return ScreenUtilInit(
-            designSize: const Size(375, 812),
-            minTextAdapt: true,
-            splitScreenMode: true,
-            builder: (context, child) {
-              return MaterialApp(
-                navigatorKey: sl<NavigatorService>().navigatorKey,
-                debugShowCheckedModeBanner: false,
-                title: 'Standard Repo',
-                locale: state.locale,
-                supportedLocales: AppLocalizationsSetup.supportedLocales,
-                localeResolutionCallback:
-                    AppLocalizationsSetup.localeResolutionCallback,
-                localizationsDelegates:
-                    AppLocalizationsSetup.localizationsDelegates,
-                theme: ThemeData(
-                  primarySwatch: Colors.blue,
-                  fontFamily: AppConstants.fontFamily,
-                ),
-                initialRoute: AppRoutes.splash,
-                onGenerateRoute: AppRoutes.generateRoute,
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, themeState) {
+          return BlocBuilder<LocaleCubit, LocaleState>(
+            buildWhen: (previousState, currentState) {
+              return previousState != currentState;
+            },
+            builder: (context, localeState) {
+              return ScreenUtilInit(
+                designSize: const Size(375, 812),
+                minTextAdapt: true,
+                splitScreenMode: true,
                 builder: (context, child) {
-                  return NoInternetHandler(child: child!);
+                  return MaterialApp(
+                    navigatorKey: sl<NavigatorService>().navigatorKey,
+                    debugShowCheckedModeBanner: false,
+                    title: 'Standard Repo',
+                    locale: localeState.locale,
+                    themeMode: themeState.themeMode,
+                    supportedLocales: AppLocalizationsSetup.supportedLocales,
+                    localeResolutionCallback:
+                        AppLocalizationsSetup.localeResolutionCallback,
+                    localizationsDelegates:
+                        AppLocalizationsSetup.localizationsDelegates,
+                    theme: ThemeData(
+                      brightness: Brightness.light,
+                      primarySwatch: Colors.blue,
+                      fontFamily: AppConstants.fontFamily,
+                      scaffoldBackgroundColor: const Color(0xFFF8F8F8),
+                    ),
+                    darkTheme: ThemeData(
+                      brightness: Brightness.dark,
+                      primarySwatch: Colors.blue,
+                      fontFamily: AppConstants.fontFamily,
+                      scaffoldBackgroundColor: const Color(0xFF121212),
+                    ),
+                    initialRoute: AppRoutes.splash,
+                    onGenerateRoute: AppRoutes.generateRoute,
+                    builder: (context, child) {
+                      return NoInternetHandler(child: child!);
+                    },
+                  );
                 },
               );
             },

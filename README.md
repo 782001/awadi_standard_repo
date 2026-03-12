@@ -13,6 +13,7 @@ This is a **ready-to-use Flutter utilities setup** that simplifies common tasks 
 - Safe logging management
 - Data obfuscation
 - Global error handling
+- Theme management (Dark/Light)
   It’s modular and can be copied into any Flutter project.
 
 ---
@@ -40,6 +41,9 @@ AppLogger.handleLogs("Log message only in debug mode");
 SecurityService.isEnabled = true;
 await SecurityService.checkSecurity(); // Navigates if insecure
 String safeData = SecurityService.obfuscateData("sensitive@info.com");
+
+------------Theme----------------
+context.read<ThemeCubit>().toggleTheme();
 ```
 
 ## 1️⃣ NavigatorService
@@ -171,15 +175,14 @@ class DioClient {
 
 **Usage1:**
 
-1️⃣1️⃣**Usage:**1️⃣1️⃣:
-
 ```dart
  Directly from GetIt
 final dio = sl<DioClient>();
 final response = await dio.get('/users');
 ```
 
-2️⃣2️⃣**Usage:**2️2️
+**Usage2:**
+
 او ممكن نخلي الكونستراكتور ياخدها لما نستدعي الريموت داتا سورس جوه الinjection_container.dart
 
 Passing Dio to Remote Data Source via Injection Container
@@ -242,8 +245,8 @@ Future<void> init() async {
 
 ```
 lang/
-  ├─ ar.json
-  ├─ en.json
+   ├─ ar.json
+   ├─ en.json
 lib/
 ├─ core/
 │  ├─ dio_client/
@@ -266,10 +269,6 @@ lib/
 
 run in terminal
 => dart run flutter_launcher_icons
-
----
-
-This setup allows you to copy the folder structure and utilities into any Flutter project and get started immediately.
 
 ---
 
@@ -385,3 +384,34 @@ String safeEmail = SecurityService.obfuscateData(sensitiveEmail); // us****om
 - **Informative**: Shows error details in a scrollable, selectable container.
 - **Themed**: Matches the app's primary colors and typography.
 - **Production Ready**: Prevents users from seeing raw code crashes.
+
+---
+
+## 1️⃣2️⃣ Theme Management (Dark/Light Mode)
+
+A Cubit-based theme management system that persists the user's choice using `CashHelper`.
+
+### Implementation
+- **ThemeCubit**: Handles state transitions between `ThemeMode.light` and `ThemeMode.dark`.
+- **Persistence**: Automatically saves the selected theme to `SharedPreferences`.
+- **Integration**: Wrapped in `main.dart`'s `MaterialApp` via `BlocBuilder`.
+
+### Usage
+Toggle theme from any widget:
+
+```dart
+import 'package:new_standred/features/theme/presentation/cubit/theme_cubit.dart';
+
+// Inside a build method or button callback
+context.read<ThemeCubit>().toggleTheme();
+
+// Or switch to specific modes
+context.read<ThemeCubit>().toDarkMode();
+context.read<ThemeCubit>().toLightMode();
+```
+
+---
+
+This setup allows you to copy the folder structure and utilities into any Flutter project and get started immediately.
+
+---
