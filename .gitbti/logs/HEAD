@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 c2b6f48f0f9a1c69553c77566e86d0397516e2a3 Abdalla <alwdyb782001@gmail.com> 1770655322 +0200	clone: from https://github.com/aliMohamed2001/standred_repo.git
+c2b6f48f0f9a1c69553c77566e86d0397516e2a3 88dc73fb6a1e592050a3e8828f7bf274e7ad795c Abdalla <alwdyb782001@gmail.com> 1770655966 +0200	pull --tags origin main: Fast-forward
+88dc73fb6a1e592050a3e8828f7bf274e7ad795c c0eeff58ed9bbff01fe376616e9b1b2ddd38487f Abdalla <alwdyb782001@gmail.com> 1770657169 +0200	commit: fix NoInternetHandler error
+c0eeff58ed9bbff01fe376616e9b1b2ddd38487f bc43965c740f865de6b8fa0f72a6831329b7a781 Abdalla <alwdyb782001@gmail.com> 1771769424 +0200	commit: add init dependency and cashhelper, navigator service , readme file "important"
