@@ -2,7 +2,6 @@
 
 This is a **ready-to-use Flutter utilities setup** that simplifies common tasks such as:
 
-
 - Localization (translations)
 - SharedPreferences management
 - Dio setup for APIs
@@ -14,9 +13,10 @@ This is a **ready-to-use Flutter utilities setup** that simplifies common tasks 
 - Safe logging management
 - Data obfuscation
 - Global error handling
-It’s modular and can be copied into any Flutter project.
+  It’s modular and can be copied into any Flutter project.
 
 ---
+
 **Usage anywhere:**
 
 ```dart
@@ -46,6 +46,7 @@ String safeData = SecurityService.obfuscateData("sensitive@info.com");
 
 ✅✅A singleton service to handle **navigation from anywhere** in the app, without needing `BuildContext`.
 it added to getIt in injectionContainer.dart
+
 ```dart
 import 'package:flutter/material.dart';
 NavigatorService nav() => sl<NavigatorService>();
@@ -72,7 +73,8 @@ navigator.context;
 ---
 
 ## 2️⃣ CashHelper (SharedPreferences)
-✅✅  it added to getIt in injectionContainer.dart
+
+✅✅ it added to getIt in injectionContainer.dart
 Wrapper around SharedPreferences for easy access and consistent use.
 
 ```dart
@@ -87,14 +89,7 @@ class CashHelper {
   bool? getBoolData({required String key}) => sharedPreferences.getBool(key);
   Future<bool> saveData({required String key, required dynamic value}) async {
  if (value is String) {
-      if (key == 'token') {
-       **--- i do this to make token saved in ApiConstance.userToken **  
-**Usage:**
-can access it  ApiConstance.userToken;
 
-        ApiConstance.userToken = value as String? ?? '';
-
-      }
       return await sharedPreferences.setString(key, value);
     }    if (value is int) return sharedPreferences.setInt(key, value);
     if (value is bool) return sharedPreferences.setBool(key, value);
@@ -143,8 +138,11 @@ class DioClient {
               AppStrings.currentLang;
           options.headers[ApiKeys.acceptLanguage] = lang;
 
-          final token = AppStrings.userToken;
-          options.headers[ApiKeys.authorization] = 'Bearer $token';
+           // Fetch token securely
+          final token = await sl<SecureStorageHelper>().getData(key: 'token');
+          if (token != null) {
+            options.headers[ApiKeys.authorization] = 'Bearer $token';
+          }
           return handler.next(options);
         },
         onResponse: (response, handler) {
@@ -164,17 +162,17 @@ class DioClient {
       ),
     );
   }
+}
 
 
 
 
- 
 ```
 
-**Usage:**
-
+**Usage1:**
 
 1️⃣1️⃣**Usage:**1️⃣1️⃣:
+
 ```dart
  Directly from GetIt
 final dio = sl<DioClient>();
@@ -182,9 +180,10 @@ final response = await dio.get('/users');
 ```
 
 2️⃣2️⃣**Usage:**2️2️
-او ممكن نخلي الكونستراكتور ياخدها لما نستدعي الريموت داتا سورس جوه  الinjection_container.dart
+او ممكن نخلي الكونستراكتور ياخدها لما نستدعي الريموت داتا سورس جوه الinjection_container.dart
 
- Passing Dio to Remote Data Source via Injection Container
+Passing Dio to Remote Data Source via Injection Container
+
 ```dart
 class AddToCartRemoteDataSource extends AddToCartBaseRemoteDataSource {
   final DioClient dio;
@@ -227,8 +226,6 @@ Future<void> init() async {
 }
 ```
 
-
-
 ---
 
 ## ✅ Advantages
@@ -263,14 +260,16 @@ lib/
 
 ```
 
------
+---
 
-## to handle app icon 
-run in terminal 
-=>  dart run flutter_launcher_icons
------
+## to handle app icon
+
+run in terminal
+=> dart run flutter_launcher_icons
+
+---
+
 This setup allows you to copy the folder structure and utilities into any Flutter project and get started immediately.
-
 
 ---
 
@@ -304,6 +303,7 @@ void _navigateToNext() async {
 ```
 
 **Features:**
+
 - Responsive warning screen using `ScreenUtil`.
 - Automatic navigation to `SecurityWarningScreen` if conditions are met.
 - Follows the app's standard design system and typography.
@@ -331,6 +331,7 @@ AppLogger.handleLogs("User logged in with ID: 123");
 ✅✅ Guidelines and tools for protecting sensitive information.
 
 ### Secure Storage (Tokens)
+
 Always use `SecureStorageHelper` for sensitive data like authentication tokens instead of `SharedPreferences`.
 
 ```dart
@@ -339,6 +340,7 @@ await secureStorage.saveData(key: 'token', value: 'my_secret_token');
 ```
 
 ### Data Obfuscation
+
 The `SecurityService` provides a toggle to obfuscate sensitive data in the UI or logs.
 
 ```dart
@@ -366,9 +368,10 @@ String safeEmail = SecurityService.obfuscateData(sensitiveEmail); // us****om
     .env*
     ```
 3.  **Access variables** in code:
+
     ```dart
     import 'package:flutter_dotenv/flutter_dotenv.dart';
-    
+
     String baseUrl = dotenv.env['API_BASE_URL'] ?? 'fallback_url';
     ```
 
@@ -382,4 +385,3 @@ String safeEmail = SecurityService.obfuscateData(sensitiveEmail); // us****om
 - **Informative**: Shows error details in a scrollable, selectable container.
 - **Themed**: Matches the app's primary colors and typography.
 - **Production Ready**: Prevents users from seeing raw code crashes.
-
