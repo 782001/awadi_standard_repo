@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_standred/features/localization/presentation/cubit/locale_cubit.dart';
+import 'package:new_standred/features/standard_features/localization/presentation/cubit/locale_cubit.dart';
 import 'package:new_standred/shared/widgets/fields/text_widget.dart';
 
 class LanguageSection extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:new_standred/core/base_usecase/base_usecase.dart';
 import 'package:dartz/dartz.dart';
-import 'package:new_standred/features/localization/domain/usecases/no_parameter.dart';
+import 'package:new_standred/features/standard_features/localization/domain/usecases/no_parameter.dart';
 import '../repositories/lang_repository.dart';
 
 class GetSavedLangUseCase implements BaseUseCase<String, NoParemeters> {

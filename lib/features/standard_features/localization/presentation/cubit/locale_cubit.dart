@@ -1,13 +1,13 @@
 import 'package:new_standred/core/services/injection_container.dart';
 import 'package:new_standred/core/storage/cashhelper.dart';
 import 'package:new_standred/core/utils/app_strings.dart';
-import 'package:new_standred/features/localization/domain/usecases/change_lang.dart';
-import 'package:new_standred/features/localization/domain/usecases/get_saved_lang.dart';
+import 'package:new_standred/features/standard_features/localization/domain/usecases/change_lang.dart';
+import 'package:new_standred/features/standard_features/localization/domain/usecases/get_saved_lang.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_standred/features/localization/domain/usecases/no_parameter.dart';
+import 'package:new_standred/features/standard_features/localization/domain/usecases/no_parameter.dart';
 
 part 'locale_state.dart';
 

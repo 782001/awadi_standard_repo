@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_standred/core/utils/app_colors.dart';
-import 'package:new_standred/features/theme/presentation/cubit/theme_cubit.dart';
-import 'package:new_standred/features/theme/presentation/cubit/theme_state.dart';
+import 'package:new_standred/features/standard_features/theme/presentation/cubit/theme_cubit.dart';
+import 'package:new_standred/features/standard_features/theme/presentation/cubit/theme_state.dart';
 
 class ThemeSwitchListTile extends StatelessWidget {
   final String title;

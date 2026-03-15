@@ -8,11 +8,11 @@ import 'package:new_standred/core/services/injection_container.dart';
 import 'package:new_standred/core/services/injection_container.dart' as di;
 import 'package:new_standred/core/services/navigator_service.dart';
 import 'package:new_standred/core/utils/app_constants.dart';
-import 'package:new_standred/features/error/presentation/screens/error_screen.dart';
-import 'package:new_standred/features/localization/presentation/cubit/locale_cubit.dart';
-import 'package:new_standred/features/theme/presentation/cubit/theme_cubit.dart';
-import 'package:new_standred/features/theme/presentation/cubit/theme_state.dart';
-import 'package:new_standred/no-internet/no_internet.dart';
+import 'package:new_standred/features/standard_features/error/presentation/screens/error_screen.dart';
+import 'package:new_standred/features/standard_features/localization/presentation/cubit/locale_cubit.dart';
+import 'package:new_standred/features/standard_features/theme/presentation/cubit/theme_cubit.dart';
+import 'package:new_standred/features/standard_features/theme/presentation/cubit/theme_state.dart';
+import 'package:new_standred/features/standard_features/no-internet/no_internet.dart';
 import 'package:new_standred/routes/app_routes.dart';
 
 void main() async {

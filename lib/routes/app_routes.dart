@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_standred/features/security/presentation/screens/security_warning_screen.dart';
+import 'package:new_standred/features/standard_features/security/presentation/screens/security_warning_screen.dart';
 import 'package:new_standred/features/splash/splash_screen.dart';
 import 'package:new_standred/shared/widgets/fields/text_widget.dart';
 

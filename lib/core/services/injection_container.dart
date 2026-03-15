@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:new_standred/core/dio_client/dio_client.dart';
-import 'package:new_standred/core/services/navigator_service.dart';
-import 'package:new_standred/core/storage/cashhelper.dart';
-import 'package:new_standred/core/storage/secure_storage_helper.dart';
-import 'package:new_standred/features/localization/data/datasources/lang_local_data_source.dart';
-import 'package:new_standred/features/localization/data/repositories/lang_repository_impl.dart';
-import 'package:new_standred/features/localization/domain/repositories/lang_repository.dart';
-import 'package:new_standred/features/localization/domain/usecases/change_lang.dart';
-import 'package:new_standred/features/localization/domain/usecases/get_saved_lang.dart';
-import 'package:new_standred/features/localization/presentation/cubit/locale_cubit.dart';
-import 'package:new_standred/features/theme/presentation/cubit/theme_cubit.dart';
+import '../../core/dio_client/dio_client.dart';
+import '../../core/services/navigator_service.dart';
+import '../../core/storage/cashhelper.dart';
+import '../../core/storage/secure_storage_helper.dart';
+import '../../features/standard_features/localization/data/datasources/lang_local_data_source.dart';
+import '../../features/standard_features/localization/data/repositories/lang_repository_impl.dart';
+import '../../features/standard_features/localization/domain/repositories/lang_repository.dart';
+import '../../features/standard_features/localization/domain/usecases/change_lang.dart';
+import '../../features/standard_features/localization/domain/usecases/get_saved_lang.dart';
+import '../../features/standard_features/localization/presentation/cubit/locale_cubit.dart';
+import '../../features/standard_features/theme/presentation/cubit/theme_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;

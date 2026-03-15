@@ -5,8 +5,8 @@ import 'package:new_standred/core/services/translation_helper.dart';
 import 'package:new_standred/core/utils/assets.dart';
 import 'package:new_standred/shared/widgets/fields/text_widget.dart';
 
-import '../../../core/utils/styles.dart';
-import '../../../shared/widgets/buttons/custom_button.dart';
+import '../../../../../core/utils/styles.dart';
+import '../../../../../shared/widgets/buttons/custom_button.dart';
 
 class NoInternetCard extends StatelessWidget {
   final Animation<Color?> colorAnimation;
