@@ -1,18 +1,18 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:vault_kit/vault_kit.dart';
 
 class SecureStorageHelper {
-  final FlutterSecureStorage _storage;
+  final VaultKit _storage;
 
   SecureStorageHelper(this._storage);
 
   /// Save a value securely
   Future<void> saveData({required String key, required String value}) async {
-    await _storage.write(key: key, value: value);
+    await _storage.save(key: key, value: value);
   }
 
   /// Read a value securely
   Future<String?> getData({required String key}) async {
-    return await _storage.read(key: key);
+    return await _storage.fetch<String>(key: key);
   }
 
   /// Remove a value securely
@@ -22,6 +22,6 @@ class SecureStorageHelper {
 
   /// Clear all secure data
   Future<void> clearAll() async {
-    await _storage.deleteAll();
+    await _storage.clearAll();
   }
 }

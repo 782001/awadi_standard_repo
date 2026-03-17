@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:vault_kit/vault_kit.dart';
 import 'package:get_it/get_it.dart';
 import '../../core/dio_client/dio_client.dart';
 import '../../core/services/navigator_service.dart';
@@ -98,9 +98,9 @@ Future<void> initDependencies() async {
     () => CashHelper(sl<SharedPreferences>()),
   );
 
-  const secureStorage = FlutterSecureStorage();
+  final vault = VaultKit();
   sl.registerLazySingleton<SecureStorageHelper>(
-    () => SecureStorageHelper(secureStorage),
+    () => SecureStorageHelper(vault),
   );
 
   /// --------------------------

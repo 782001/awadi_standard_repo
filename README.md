@@ -10,7 +10,7 @@ This is a **ready-to-use Flutter utilities setup** that simplifies common tasks 
 - Centralized theme-aware colors (AppColors)
 - flutter_launcher_icons
 - Security device checks (Root/Jailbreak)
-- Secure token storage
+- Secure token storage (VaultKit)
 - Safe logging management
 - Data obfuscation
 - Global error handling
@@ -114,8 +114,8 @@ class CashHelper {
 **Usage:**
 
 ```dart
-final token = sl<CashHelper>().getData(key: 'token');
-await sl<CashHelper>().saveData(key: 'token', value: 'abc123');
+final AppStrings.locale = sl<CashHelper>().getData(key: "locale");
+await sl<CashHelper>().saveData(key: 'locale', value: 'abc123');
 ```
 
 ---
@@ -335,6 +335,13 @@ AppLogger.handleLogs("User logged in with ID: 123");
 ✅✅ Guidelines and tools for protecting sensitive information.
 
 ### Secure Storage (Tokens)
+
+The project uses **VaultKit** for secure storage. VaultKit is a lightweight, efficient, and native solution (AES-256-GCM on Android, Keychain on iOS) designed for high performance and a clean API.
+
+**Why VaultKit?**
+- **Lighter & Efficient**: Minimal overhead compared to other solutions.
+- **Improved Performance**: Faster read/write operations for quick token access.
+- **Native Security**: Uses OS-level encryption (Android Keystore / iOS Keychain).
 
 Always use `SecureStorageHelper` for sensitive data like authentication tokens instead of `SharedPreferences`.
 
