@@ -5,7 +5,8 @@ class Endpoint {
   static var apiBaseUrl =
       '';
 
-  static const loginEndpoint = 'Login';
+  static const getCategoriesEndpoint = '/categories';
+  static const getCategoryByIdEndpoint = '/categories';
 
 
   static const connectionTimeout = Duration(seconds: 40);

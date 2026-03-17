@@ -1,6 +1,6 @@
-# Flutter Utilities Boilerplate
+# Abdullah Alawadi's Standard Reference Repo
 
-This is a **ready-to-use Flutter utilities setup** that simplifies common tasks such as:
+This project serves as a **standard repository for Abdullah Alawadi’s personal coding style**. It is a reusable base for future development, demonstrating a clean, maintainable, and scalable approach to building Flutter applications.
 
 - Localization (translations)
 - SharedPreferences management
@@ -16,6 +16,36 @@ This is a **ready-to-use Flutter utilities setup** that simplifies common tasks 
 - Global error handling
 - Theme management (Dark/Light)
   It’s modular and can be copied into any Flutter project.
+
+---
+
+## 🎯 Project Purpose
+
+This repository is designed to be:
+- **A Standard Reference**: A reflection of Abdullah Alawadi’s approach to writing high-quality Flutter code.
+- **Reusable Base**: A modular boilerplate that can be integrated into any new project to jumpstart development with best practices.
+- **Clean Architecture Showcase**: A real-world demonstration of how Clean Architecture is implemented to separate concerns and ensure maintainability.
+
+---
+
+## 🚀 Latest Changes (March 17, 2026)
+
+### 1. Secure Storage Migration (`vault_kit`)
+- **Refactor**: Replaced `flutter_secure_storage` with `vault_kit: ^1.0.5`.
+- **Reasoning**: Switched to a lighter and more efficient native encryption solution (AES-256-GCM on Android, Keychain on iOS) with improved read/write performance for authentication tokens.
+- **Implementation**: Updated `SecureStorageHelper` and Dependency Injection to use the new engine while maintaining the existing abstraction layer.
+
+### 2. Clean Architecture Implementation (Category Module)
+- **Feature**: Added a new `Category` feature following strict Clean Architecture principles.
+- **Components**:
+    - **Data Layer**: Remote Data Source and Repository implementation.
+    - **Domain Layer**: Entities and Use Cases (`GetCategories`, `GetCategoryById`).
+    - **Presentation Layer**: BLoC/Cubit for state management.
+- **Purpose**: Serves as a live example of how to scale the project with new features using the established architectural patterns.
+
+### 3. API Infrastructure Improvements
+- Updated `Endpoint` management to include dynamic category routing.
+- Enhanced `injection_container.dart` with modular dependency registration.
 
 ---
 

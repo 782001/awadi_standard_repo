@@ -13,11 +13,53 @@ import '../../features/standard_features/localization/domain/usecases/get_saved_
 import '../../features/standard_features/localization/presentation/cubit/locale_cubit.dart';
 import '../../features/standard_features/theme/presentation/cubit/theme_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../features/category/presentation/controller/category_cubit/category_cubit.dart';
+import '../../features/category/domain/usecases/get_categories_usecase.dart';
+import '../../features/category/domain/repositories/get_categories_repo_base.dart';
+import '../../features/category/data/repositories/get_categories_repo_impl.dart';
+import '../../features/category/data/data_sources/get_categories_remote_ds.dart';
+import '../../features/category/domain/usecases/get_category_by_id_usecase.dart';
+import '../../features/category/domain/repositories/get_category_by_id_repo_base.dart';
+import '../../features/category/data/repositories/get_category_by_id_repo_impl.dart';
+import '../../features/category/data/data_sources/get_category_by_id_remote_ds.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initDependencies() async {
   //! Features
+
+  // Category
+  /// -----CategoryCubit------
+  sl.registerFactory<CategoryCubit>(
+    () => CategoryCubit(
+      kGetCategoryByIdUseCase: sl(),
+      kGetCategoriesUseCase: sl(),
+    ),
+  );
+
+  /// --------useCases----------
+  sl.registerLazySingleton<GetCategoryByIdUseCase>(
+    () => GetCategoryByIdUseCase(baseRepository: sl()),
+  );
+  sl.registerLazySingleton<GetCategoriesUseCase>(
+    () => GetCategoriesUseCase(baseRepository: sl()),
+  );
+
+  /// --------Repository--------
+  sl.registerLazySingleton<GetCategoryByIdBaseRepository>(
+    () => GetCategoryByIdRepository(sl()),
+  );
+  sl.registerLazySingleton<GetCategoriesBaseRepository>(
+    () => GetCategoriesRepository(sl()),
+  );
+
+  /// --------DataSource--------
+  sl.registerLazySingleton<GetCategoryByIdBaseRemoteDataSource>(
+    () => GetCategoryByIdRemoteDataSource(sl<DioClient>()),
+  );
+  sl.registerLazySingleton<GetCategoriesBaseRemoteDataSource>(
+    () => GetCategoriesRemoteDataSource(sl<DioClient>()),
+  );
 
   // localization
   /// -----localizationCubit------
@@ -26,9 +68,7 @@ Future<void> initDependencies() async {
   );
 
   // theme
-  sl.registerFactory<ThemeCubit>(
-    () => ThemeCubit(cashHelper: sl()),
-  );
+  sl.registerFactory<ThemeCubit>(() => ThemeCubit(cashHelper: sl()));
 
   /// --------useCases----------
   sl.registerLazySingleton<ChangeLangUseCase>(
