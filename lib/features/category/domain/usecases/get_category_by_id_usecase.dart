@@ -19,12 +19,10 @@ class GetCategoryByIdUseCase
 }
 
 class GetCategoryByIdParameters extends Equatable {
-  final String categoryId;
+  
 
-  const GetCategoryByIdParameters({
-    required this.categoryId,
-  });
+  const GetCategoryByIdParameters();
 
   @override
-  List<Object?> get props => [categoryId];
+  List<Object?> get props => [];
 }

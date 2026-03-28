@@ -24,9 +24,7 @@ GetCategoryByIdRemoteDataSource(this.dio);
       Endpoint.getCategoryByIdEndpoint,
       //      "${Endpoint.getCategoryByIdEndpoint}/${parameters.productId}",
 
-      queryParameters: {
-        'categoryId': parameters.categoryId
-      },
+
 
     );
      return GetCategoryByIdResponseModel.fromJson(response.data);  

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:new_standred/core/utils/app_logger.dart';
 
 import '../../../domain/entities/get_category_by_id_entity.dart';
 import '../../../domain/usecases/get_category_by_id_usecase.dart';
@@ -19,21 +20,19 @@ class CategoryCubit extends Cubit<CategoryState> {
 
   static CategoryCubit get(context) => BlocProvider.of<CategoryCubit>(context);
   GetCategoryByIdResponseEntity? getCategoryByIdResponseEntity;
-  void getCategoryByIdMethod({required String categoryId}) async {
+  void getCategoryByIdMethod() async {
     emit(GetCategoryByIdLoadingState());
 
-    final response = await kGetCategoryByIdUseCase(
-      GetCategoryByIdParameters(categoryId: categoryId),
-    );
+    final response = await kGetCategoryByIdUseCase(GetCategoryByIdParameters());
 
     response.fold(
       (failure) {
-        debugPrint('Failure: GetCategoryByIdErrorState');
+        AppLogger.handleLogs('Failure: GetCategoryByIdErrorState');
         emit(GetCategoryByIdErrorState());
       },
       (r) {
         getCategoryByIdResponseEntity = r;
-        debugPrint('Success: ${r.message}');
+        AppLogger.handleLogs('Success: ${r.message}');
         emit(GetCategoryByIdSucssesState(message: r.message!));
       },
     );
@@ -47,12 +46,12 @@ class CategoryCubit extends Cubit<CategoryState> {
 
     response.fold(
       (failure) {
-        debugPrint('Failure: GetCategoriesErrorState');
+        AppLogger.handleLogs('Failure: GetCategoriesErrorState');
         emit(GetCategoriesErrorState());
       },
       (r) {
         getCategoriesResponseEntity = r;
-        debugPrint('Success: ${r.message}');
+        AppLogger.handleLogs('Success: ${r.message}');
         emit(GetCategoriesSucssesState(message: r.message ?? ''));
       },
     );

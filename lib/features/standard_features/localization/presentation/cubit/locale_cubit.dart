@@ -1,5 +1,6 @@
 import 'package:new_standred/core/services/injection_container.dart';
 import 'package:new_standred/core/storage/cashhelper.dart';
+import 'package:new_standred/core/utils/app_logger.dart';
 import 'package:new_standred/core/utils/app_strings.dart';
 import 'package:new_standred/features/standard_features/localization/domain/usecases/change_lang.dart';
 import 'package:new_standred/features/standard_features/localization/domain/usecases/get_saved_lang.dart';
@@ -23,7 +24,9 @@ class LocaleCubit extends Cubit<LocaleState> {
 
   Future<void> getSavedLang() async {
     final response = await getSavedLangUseCase.call(NoParemeters());
-    response.fold((failure) => debugPrint(AppStrings.cacheFailure), (value) {
+    response.fold((failure) => AppLogger.handleLogs(AppStrings.cacheFailure), (
+      value,
+    ) {
       currentLangCode = value;
       AppStrings.currentLang = value;
       emit(ChangeLocaleState(Locale(currentLangCode)));
@@ -32,7 +35,9 @@ class LocaleCubit extends Cubit<LocaleState> {
 
   Future<void> _changeLang(String langCode) async {
     final response = await changeLangUseCase.call(langCode);
-    response.fold((failure) => debugPrint(AppStrings.cacheFailure), (value) {
+    response.fold((failure) => AppLogger.handleLogs(AppStrings.cacheFailure), (
+      value,
+    ) {
       currentLangCode = langCode;
       AppStrings.currentLang = langCode;
 
