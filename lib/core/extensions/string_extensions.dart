@@ -1,4 +1,12 @@
 extension StringExtensions on String {
+  /// Translates the string key using the current localization.
+  /// Example: 'login'.tr()
+  String tr() {
+    final context = nav().context;
+    if (context == null) return this;
+    return Loc.tr(context, this);
+  }
+ 
   /// Parses the string to an [int] or returns null if it cannot be parsed.
   /// Example: '123'.toIntOrNull() // 123
   /// Example: 'abc'.toIntOrNull() // null
