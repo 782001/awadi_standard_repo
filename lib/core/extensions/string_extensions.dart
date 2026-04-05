@@ -1,12 +1,22 @@
+import 'package:new_standred/core/services/navigator_service.dart';
+import 'package:new_standred/core/services/translation_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:new_standred/core/config/locale/app_localizations.dart';
+import 'package:new_standred/core/services/translation_helper.dart';
+
 extension StringExtensions on String {
-  /// Translates the string key using the current localization.
-  /// Example: 'login'.tr()
+  /// Translates the string key using the current localization instance.
+  /// Matches the easy_localization usage pattern: 'key'.tr()
   String tr() {
-    final context = nav().context;
-    if (context == null) return this;
+    return AppLocalizations.tr(this);
+  }
+
+  /// Translates the string key using a specific [context].
+  /// Useful if you want to ensure the lookup happens within a specific widget subtree.
+  String loc(BuildContext context) {
     return Loc.tr(context, this);
   }
- 
+
   /// Parses the string to an [int] or returns null if it cannot be parsed.
   /// Example: '123'.toIntOrNull() // 123
   /// Example: 'abc'.toIntOrNull() // null
@@ -20,9 +30,7 @@ extension StringExtensions on String {
   /// Checks whether the string is a valid email format.
   /// Example: 'test@example.com'.isValidEmail() // true
   bool isValidEmail() {
-    final emailRegExp = RegExp(
-      r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+',
-    );
+    final emailRegExp = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
     return emailRegExp.hasMatch(this);
   }
 
@@ -46,7 +54,7 @@ extension NullableStringExtensions on String? {
   /// Example: null.isNullOrEmpty // true
   /// Example: ''.isNullOrEmpty // true
   bool get isNullOrEmpty => this == null || this!.isEmpty;
-  
+
   /// Returns true if the string is neither null nor empty.
   bool get isNotNullNorEmpty => this != null && this!.isNotEmpty;
 }

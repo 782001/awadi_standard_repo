@@ -4,6 +4,7 @@ import 'package:new_standred/core/utils/app_logger.dart';
 import 'package:new_standred/core/utils/app_strings.dart';
 import 'package:new_standred/features/standard_features/localization/domain/usecases/change_lang.dart';
 import 'package:new_standred/features/standard_features/localization/domain/usecases/get_saved_lang.dart';
+import 'package:tahsel/core/config/locale/app_localizations.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +27,12 @@ class LocaleCubit extends Cubit<LocaleState> {
     final response = await getSavedLangUseCase.call(NoParemeters());
     response.fold((failure) => AppLogger.handleLogs(AppStrings.cacheFailure), (
       value,
-    ) {
+    ) async {
       currentLangCode = value;
       AppStrings.currentLang = value;
-      emit(ChangeLocaleState(Locale(currentLangCode)));
+      final locale = Locale(currentLangCode);
+      await AppLocalizations.init(locale);
+      emit(ChangeLocaleState(locale));
     });
   }
 
