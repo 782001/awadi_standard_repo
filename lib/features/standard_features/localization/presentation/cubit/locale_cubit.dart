@@ -1,10 +1,8 @@
-import 'package:new_standred/core/services/injection_container.dart';
-import 'package:new_standred/core/storage/cashhelper.dart';
 import 'package:new_standred/core/utils/app_logger.dart';
 import 'package:new_standred/core/utils/app_strings.dart';
 import 'package:new_standred/features/standard_features/localization/domain/usecases/change_lang.dart';
 import 'package:new_standred/features/standard_features/localization/domain/usecases/get_saved_lang.dart';
-import 'package:tahsel/core/config/locale/app_localizations.dart';
+import 'package:new_standred/core/config/locale/app_localizations.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
